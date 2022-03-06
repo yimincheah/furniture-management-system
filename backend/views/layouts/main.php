@@ -21,12 +21,31 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php 
+		$this->head() 
+	?>
 
 	<style>	
 		.invalid-feedback{
 			color: red;
 		}
+
+		.btn-warning {
+			background: #f0ad4e;
+		}
+		.btn-danger {   
+			background-color: #d9534f;
+		}
+		.btn-success {
+			background-color: #5cb85c;
+		}
+
+		.btn:hover
+		{
+			background:#5cb85c;
+			color:#ffffff;
+		}
+
 	</style>
 </head>
 <body>

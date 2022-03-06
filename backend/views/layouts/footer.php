@@ -67,8 +67,7 @@ use yii\bootstrap4\Html;
 
 								<?php if(!Yii::$app->user->isGuest) {?>	
 								<li><?= Html::a('Home', ['/']) ?></li>
-
-								<li><a href="index.html">Contact</a></li>
+								<li><?= Html::a('Manage Brand', ['/brands/index']) ?></li>
 								<?php } ?>
 							</ul>
 					</div>

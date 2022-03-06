@@ -98,26 +98,12 @@ use yii\bootstrap4\Html;
 									
 									</li>
 									<li class="panel mobile_menu_li">
-										<a href="#" class="mar-mobile">Shop</a>
+										<a href="#" class="mar-mobile">Furniture</a>
 											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category85" aria-expanded="false">
 											<span class="plus">+</span><span class="minus">-</span></a></span>
 											<div id="category85" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
 												<ul>
-													<li>
-															<a href="services.html">Products List</a>
-													</li>
-													<li>
-															<a href="cart.html">Cart</a>
-													</li>
-													<li>
-															<a href="checkout.html">Checkout</a>
-													</li>
-													<li>
-															<a href="single-products.html">Products Details</a>
-													</li>
-													<li>
-															<a href="404.html">404</a>
-													</li>
+													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -144,21 +130,7 @@ use yii\bootstrap4\Html;
 											</div>
 									</li>
 								
-									<li class="panel mobile_menu_li">
-										<a href="#" class="mar-mobile">my Account</a>
-											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category87" aria-expanded="false">
-											<span class="plus">+</span><span class="minus">-</span></a></span>
-											<div id="category87" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
-												<ul>
-													<li>
-															<a href="login.html"> Login </a>
-													</li>
-													<li>
-															<a href="register.html"> Register</a>
-													</li>
-												</ul>
-											</div>
-									</li>
+									
 									<?php } ?>
 
 									<?php if(Yii::$app->user->isGuest) {?>
@@ -199,7 +171,7 @@ use yii\bootstrap4\Html;
 								<?php if(!Yii::$app->user->isGuest) { ?>
 								<li class="nav-item"><?= Html::a('Home', ['/']) ?></li>
 
-								<li class="nav-item"><a href="#" class="nav-link">Pages <i class="fa fa-angle-down"></i></a>
+								<li class="nav-item"><a href="#" class="nav-link">Product <i class="fa fa-angle-down"></i></a>
 									<ul class="dropdown-menu">
 
 										<li class="nav-item"><a href="#" class="nav-link">Shop <i class="fa fa-angle-right"></i></a>
@@ -218,17 +190,15 @@ use yii\bootstrap4\Html;
 									</ul>
 								</li>
 
-								<li class="nav-item"><a href="#" class="nav-link">Blog <i class="fa fa-angle-down"></i></a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a href="blog.html" class="nav-link">Blog Grid</a></li>
-										
-										<li class="nav-item"><a href="blog-left.html" class="nav-link">Blog Grid View Left</a></li>
-										
-										<li class="nav-item"><a href="blog-right.html" class="nav-link">Blog Grid View right</a></li>
-
-										<li class="nav-item"><a href="blog-details.html" class="nav-link">Blog Details</a></li>
-									</ul>
-								</li>
+								<?php if(Yii::$app->user->can('admin')) { ?>
+									<li class="nav-item"><a href="#" class="nav-link">Furniture <i class="fa fa-angle-down"></i></a>
+										<ul class="dropdown-menu">
+											
+											<li class="nav-item"><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
+											
+										</ul>
+									</li>
+								<?php } ?>
 							
 								<li class="nav-item"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
 							

@@ -11,7 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        // 'gridview' =>  [
+        //     'class' => '\kartik\grid\Module',
+        // ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -44,6 +48,21 @@ return [
         //     'rules' => [
         //     ],
         // ],
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+               
+            ],
+        ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d-M-Y',
+            'datetimeFormat' => 'php:d-M-Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
+            'timeZone' => 'Asia/Kuala_Lumpur',
+        ],
         
     ],
     'params' => $params,

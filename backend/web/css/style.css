@@ -81,6 +81,7 @@ a:hover {
 	letter-spacing:0.5;
   width: 270px;
 }
+
 .btn:hover
 {
 	background:#000;
@@ -1411,7 +1412,7 @@ html body .owl-carousel {
     margin-top: 5px;
     width: 20%;
 }
-}
+
 .about_images{
   margin-top: 30px;
 }

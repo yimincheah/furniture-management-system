@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\BrandSearch */
+/* @var $model backend\models\CategorySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="brands-search">
+<div class="categorys-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'brand_id') ?>
+    <?= $form->field($model, 'category_id') ?>
 
-    <?= $form->field($model, 'brand_name') ?>
+    <?= $form->field($model, 'category_name') ?>
 
-    <?= $form->field($model, 'brand_status') ?>
+    <?= $form->field($model, 'category_status') ?>
 
     <?= $form->field($model, 'created_at') ?>
 

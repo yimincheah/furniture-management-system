@@ -104,6 +104,7 @@ use yii\bootstrap4\Html;
 											<div id="category85" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
 												<ul>
 													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -195,6 +196,7 @@ use yii\bootstrap4\Html;
 										<ul class="dropdown-menu">
 											
 											<li class="nav-item"><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
+											<li class="nav-item"><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
 											
 										</ul>
 									</li>

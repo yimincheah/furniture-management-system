@@ -34,7 +34,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p>
-            <?= Html::a('Create Categorys', ['create'], ['class' => 'btn']) ?>
+            <?= Html::a('Create Category', ['create'], ['class' => 'btn']) ?>
         </p>
 
         <?= GridView::widget([

@@ -46,6 +46,10 @@ AppAsset::register($this);
 			color:#ffffff;
 		}
 
+		.iti{
+			width: 100%
+		}
+
 	</style>
 </head>
 <body>

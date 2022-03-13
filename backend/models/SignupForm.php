@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use common\models\User;
 use backend\models\AuthAssignment;
+use borales\extensions\phoneInput\PhoneInputValidator;
 /**
  * Signup form
  */
@@ -38,7 +39,8 @@ class SignupForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
             ['contactNo', 'required'],
-            [['contactNo'], 'match', 'pattern' => '/((\+[0-9]{6})|0)[-]?[0-9]{7}/'],
+            ['contactNo', 'string'],
+            [['contactNo'], PhoneInputValidator::className()], 
         ];
     }
 
@@ -73,22 +75,4 @@ class SignupForm extends Model
 
     }
 
-    /**
-     * Sends confirmation email to user
-     * @param User $user user model to with email should be send
-     * @return bool whether the email was sent
-     */
-    protected function sendEmail($user)
-    {
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
-    }
 }

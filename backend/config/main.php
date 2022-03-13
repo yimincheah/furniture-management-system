@@ -15,6 +15,9 @@ return [
         // 'gridview' =>  [
         //     'class' => '\kartik\grid\Module',
         // ],
+        'addressform' =>[
+            'class' => \tonisormisson\addressform\Module::class,
+        ],
     ],
     'components' => [
         'request' => [

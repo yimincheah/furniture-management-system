@@ -3,8 +3,10 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
+use borales\extensions\phoneInput\PhoneInput;
 
 $this->title = 'Signup';
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
 ?>
 
 <div id="content" class="login_page">
@@ -24,7 +26,14 @@ $this->title = 'Signup';
 
                         <?= $form->field($model, 'email') ?>
 
-                        <?= $form->field($model, 'contactNo') ?>
+                        <label>Contact No</label>
+                        <?= $form->field($model, 'contactNo')->widget(
+                            PhoneInput::className(), [
+                            'jsOptions' => [
+                                'preferredCountries' =>['my'],
+                            ],
+                           
+                        ])->label(false); ?>
 
                         <?= $form->field($model, 'password')->passwordInput() ?>
 

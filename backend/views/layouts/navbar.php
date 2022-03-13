@@ -33,9 +33,12 @@ use yii\bootstrap4\Html;
 								
 								<ul class="accordion" id="accordion-category">
 
-								<?php if(!Yii::$app->user->isGuest) {?>
+								<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {?>
 									<li class="panel mobile_menu_li">
 										<?= Html::a('Home', ['/'], ['class' => 'mar-mobile']) ?>
+									</li>
+									<li class="panel mobile_menu_li">
+										<?= Html::a('Customer', ['/customers/index'], ['class' => 'mar-mobile']) ?>
 									</li>
 									
 										<div id="category84" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
@@ -131,6 +134,7 @@ use yii\bootstrap4\Html;
 											</div>
 									</li>
 								
+									<li class="panel mobile_menu_li"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'mar-mobile']) ?></li>
 									
 									<?php } ?>
 
@@ -192,6 +196,9 @@ use yii\bootstrap4\Html;
 								</li>
 
 								<?php if(Yii::$app->user->can('admin')) { ?>
+
+									<li class="nav-item"><?= Html::a('Customer', ['/customers/index']) ?></li>
+
 									<li class="nav-item"><a href="#" class="nav-link">Furniture <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
 											

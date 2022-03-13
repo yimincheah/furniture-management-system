@@ -29,6 +29,9 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 </section>
 
 <div class="container" id="content">
+    
+    <?= common\widgets\Alert::widget() ?>
+
    <div class="container-fluid">
         <h1><?= Html::encode($this->title) ?></h1>
 

@@ -12,7 +12,7 @@ class m220303_084443_add_contact_column_to_user_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%user}}', 'contactNo', $this->integer());
+        $this->addColumn('{{%user}}', 'contactNo', $this->string());
     }
 
     /**

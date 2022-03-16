@@ -134,9 +134,19 @@ use yii\bootstrap4\Html;
 											</div>
 									</li>
 								
+									<li class="panel mobile_menu_li"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id], ['class' => 'mar-mobile']) ?></li>
+
 									<li class="panel mobile_menu_li"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'mar-mobile']) ?></li>
 									
 									<?php } ?>
+
+									<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('staff')) {?>
+
+										<li class="panel mobile_menu_li"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id], ['class' => 'mar-mobile']) ?></li>
+
+										<li class="panel mobile_menu_li"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'mar-mobile']) ?></li>
+
+									<?php }?>
 
 									<?php if(Yii::$app->user->isGuest) {?>
 									<li class="panel mobile_menu_li">
@@ -208,7 +218,9 @@ use yii\bootstrap4\Html;
 										</ul>
 									</li>
 								<?php } ?>
-							
+								
+								<li class="nav-item"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id]) ?></li>
+
 								<li class="nav-item"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
 							
 							</ul>

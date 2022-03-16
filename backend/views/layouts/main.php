@@ -83,9 +83,7 @@ $(document).ready(function(){
 		navigation: true,
 		navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
 	});
-});
 
-$(document).ready(function(){
 	$('#blog').owlCarousel({	
 		items: 3,
 		itemsDesktop:[1199,3],
@@ -97,10 +95,9 @@ $(document).ready(function(){
 		navigation: true,
 		navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
 	});
+
+	$('#kvFileinputModal').remove();
 });
-
-
-
 
 </script>
 

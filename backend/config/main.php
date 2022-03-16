@@ -66,6 +66,13 @@ return [
             'timeFormat' => 'php:H:i:s',
             'timeZone' => 'Asia/Kuala_Lumpur',
         ],
+        'image' => [
+                'class' => 'yii\image\ImageDriver',
+                'driver' => 'GD', 
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
         
     ],
     'params' => $params,

@@ -108,28 +108,18 @@ use yii\bootstrap4\Html;
 												<ul>
 													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 													<li><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('Manage Product', ['/products/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
 									
 									<li class="panel mobile_menu_li">
-										<a href="#" class="mar-mobile">Blog</a>
+										<a href="#" class="mar-mobile">Product</a>
 											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category86" aria-expanded="false">
 											<span class="plus">+</span><span class="minus">-</span></a></span>
 											<div id="category86" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
 												<ul>
-													<li>
-															<a href="blog.html">Blog Grid</a>
-													</li>
-													<li>
-															<a href="blog-left.html">Blog Grid View Left</a>
-													</li>
-													<li>
-															<a href="blog-right.html">Blog Grid View right</a>
-													</li>
-													<li>
-															<a href="blog-details.html">Blog Details</a>
-													</li>
+													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -214,6 +204,7 @@ use yii\bootstrap4\Html;
 											
 											<li class="nav-item"><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 											<li class="nav-item"><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
+											<li class="nav-item"><?= Html::a('Manage Product', ['/products/index'], ['class' => 'nav-link']) ?></li>
 											
 										</ul>
 									</li>

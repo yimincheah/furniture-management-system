@@ -76,5 +76,15 @@ class Brands extends \yii\db\ActiveRecord
         $list = self::getBrandStatusList();
         return $list[$status] ? $list[$status] : '';
     }
+
+    public static function getBrandList()
+    { 
+        return \yii\helpers\ArrayHelper::map(self::find()->where(['brand_status' => 'active'])->select('brand_id, brand_name')->asArray()->all(), 'brand_id', 'brand_name');
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['brand_id' => 'brand_id']);
+    }
     
 }

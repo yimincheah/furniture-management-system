@@ -77,4 +77,15 @@ class Categorys extends \yii\db\ActiveRecord
         $list = self::getCategoryStatusList();
         return $list[$status] ? $list[$status] : '';
     }
+
+    public static function getCategoryList()
+    { 
+        return \yii\helpers\ArrayHelper::map(self::find()->where(['category_status' => 'active'])->select('category_id, category_name')->asArray()->all(), 'category_id', 'category_name');
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['category_id' => 'category_id']);
+    }
+
 }

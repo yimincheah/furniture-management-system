@@ -71,6 +71,7 @@ use yii\bootstrap4\Html;
 								<li><?= Html::a('Customer', ['/customers/index']) ?></li>
 								<li><?= Html::a('Manage Brand', ['/brands/index']) ?></li>
 								<li><?= Html::a('Manage Category', ['/categorys/index']) ?></li>
+								<li><?= Html::a('Manage Product', ['/products/index']) ?></li>
 								<?php } ?>
 
 								<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('staff')) {?>

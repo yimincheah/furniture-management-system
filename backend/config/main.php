@@ -65,6 +65,9 @@ return [
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'timeZone' => 'Asia/Kuala_Lumpur',
+            'currencyCode' => 'RM',
+            'decimalSeparator' => '.',
+            'thousandSeparator' => ',',
         ],
         'image' => [
                 'class' => 'yii\image\ImageDriver',

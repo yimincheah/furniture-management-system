@@ -38,6 +38,9 @@ use yii\bootstrap4\Html;
 										<?= Html::a('Home', ['/'], ['class' => 'mar-mobile']) ?>
 									</li>
 									<li class="panel mobile_menu_li">
+										<?= Html::a('Furniture', ['/product-list/index'], ['class' => 'mar-mobile']) ?>
+									</li>
+									<li class="panel mobile_menu_li">
 										<?= Html::a('Customer', ['/customers/index'], ['class' => 'mar-mobile']) ?>
 									</li>
 									
@@ -101,7 +104,7 @@ use yii\bootstrap4\Html;
 									
 									</li>
 									<li class="panel mobile_menu_li">
-										<a href="#" class="mar-mobile">Furniture</a>
+										<a href="#" class="mar-mobile">Management</a>
 											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category85" aria-expanded="false">
 											<span class="plus">+</span><span class="minus">-</span></a></span>
 											<div id="category85" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
@@ -176,26 +179,9 @@ use yii\bootstrap4\Html;
 								<?php if(!Yii::$app->user->isGuest) { ?>
 								<li class="nav-item"><?= Html::a('Home', ['/']) ?></li>
 
-								<li class="nav-item"><a href="#" class="nav-link">Product <i class="fa fa-angle-down"></i></a>
-									<ul class="dropdown-menu">
-
-										<li class="nav-item"><a href="#" class="nav-link">Shop <i class="fa fa-angle-right"></i></a>
-											<ul class="dropdown-menu">
-												<li class="nav-item"><a href="products.html" class="nav-link">Products List</a></li>
-
-												<li class="nav-item"><a href="cart.html" class="nav-link">Cart</a></li>
-
-												<li class="nav-item"><a href="checkout.html" class="nav-link">Checkout</a></li>
-
-												<li class="nav-item"><a href="single-products.html" class="nav-link">Products Details</a></li>
-											</ul>
-										</li>
-
-										<li class="nav-item"><a href="404.html" class="nav-link">404</a></li>
-									</ul>
-								</li>
-
 								<?php if(Yii::$app->user->can('admin')) { ?>
+
+									<li class="nav-item"><?= Html::a('Products', ['/product-list/index']) ?></li>
 
 									<li class="nav-item"><?= Html::a('Customer', ['/customers/index']) ?></li>
 

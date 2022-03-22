@@ -68,6 +68,7 @@ use yii\bootstrap4\Html;
 								<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {?>	
 								<li><?= Html::a('Home', ['/']) ?></li>
 								<li><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id])?></li>
+								<li><?= Html::a('Furniture', ['/product-list/index']) ?></li>
 								<li><?= Html::a('Customer', ['/customers/index']) ?></li>
 								<li><?= Html::a('Manage Brand', ['/brands/index']) ?></li>
 								<li><?= Html::a('Manage Category', ['/categorys/index']) ?></li>

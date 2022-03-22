@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
         'https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&display=swap',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
         'vendor/slider-js/slideWiz.css',
-
+        'vendor/smoothproducts/smoothproducts.css'
 
     ];
     public $js = [
@@ -31,7 +31,9 @@ class AppAsset extends AssetBundle
         'vendor/slider-js/slideWiz.js',
         'vendor/bootstrap/js/bootstrap.min.js',
         'js/custom.js',
-        'js/modal.js'
+        'js/modal.js',
+        'vendor/smoothproducts/smoothproducts.min.js'
+        
     ];
     public $depends = [
         'yii\web\YiiAsset',

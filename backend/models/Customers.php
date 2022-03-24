@@ -43,6 +43,7 @@ class Customers extends \yii\db\ActiveRecord
             [['customer_name', 'customer_status', 'customer_email', 'customer_contact', 'country', 'state', 'city', 'postCode', 'addressLine1', 'addressLine2'], 'string', 'max' => 255],
             [['customer_contact'], PhoneInputValidator::className()], 
             [['customer_email'], 'email'],
+            [['customer_name'], 'unique'],
         ];
     }
 
@@ -104,5 +105,10 @@ class Customers extends \yii\db\ActiveRecord
     public function getCityName()
     {
         return $this->hasOne(City::className(), ['city_id' => 'city']);
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::className(), ['customer_id' => 'customer_id']);
     }
 }

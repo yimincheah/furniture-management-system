@@ -28,6 +28,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 <!-- products -->
 	<div id="products" class="products_section">
 		<div class="container-fluid">
+		<?= common\widgets\Alert::widget() ?>
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="eb_right">

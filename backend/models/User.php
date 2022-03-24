@@ -115,4 +115,9 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Uploads::className(), ['ref' => 'ref']);
     }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::className(), ['staff_id' => 'id']);
+    }
 }

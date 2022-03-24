@@ -17,7 +17,7 @@ use yii\bootstrap4\Html;
 					<div class="others-option align-items-center">
 						<div class="option-item">
 							<div class="cart-btn">
-								<a href="cart.html"><i class="fa fa-shopping-cart"></i><span>1</span></a>
+								<?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/cart/index']) ?>
 							</div>
 						</div>
 					</div>
@@ -181,11 +181,11 @@ use yii\bootstrap4\Html;
 
 								<?php if(Yii::$app->user->can('admin')) { ?>
 
-									<li class="nav-item"><?= Html::a('Products', ['/product-list/index']) ?></li>
+									<li class="nav-item"><?= Html::a('Furniture', ['/product-list/index']) ?></li>
 
 									<li class="nav-item"><?= Html::a('Customer', ['/customers/index']) ?></li>
 
-									<li class="nav-item"><a href="#" class="nav-link">Furniture <i class="fa fa-angle-down"></i></a>
+									<li class="nav-item"><a href="#" class="nav-link">Management <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
 											
 											<li class="nav-item"><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
@@ -205,7 +205,7 @@ use yii\bootstrap4\Html;
 							<div class="others-option align-items-center">
 								<div class="option-item">
 									<div class="cart-btn">
-										<a href="cart.html"><i class="fa fa-shopping-cart"></i><span>1</span></a>
+									<?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/cart/index']) ?>
 									</div>
 								</div>
 							</div>

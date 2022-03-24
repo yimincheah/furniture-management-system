@@ -32,7 +32,9 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 						<div class="single_products_images">
 							<div class="single_product_image">
 								<div class="sp-loading">
+                                    <?php if(!empty($uploads)) {?>
 								    <img src="<?= Yii::getAlias('@web').'/products/'.$product->ref.'/'.$uploads[0]['real_filename']?>" alt="<?= $uploads[0]['file_name']?>" width="100%">
+                                    <?php } ?>
 								</div>
 							</div>
 							
@@ -67,12 +69,15 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 							<div class="add-to-cart">
 								<div class="pull-left">
 									<div class="custom pull-left">
+                                    <?= Html::beginForm(['cart/add-to-cart','product_id'=>$product->product_id,'post']) ?>
 										<button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
 										<input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
 										<button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
 									</div>
 								</div>
-								<button onclick="productAddToCartForm.submit(this)" class="btn btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+								    <button class="btn btn-cart" title="Add to Cart" type="submit">Add to Cart</button>
+                                    <input type="text" name="product_id" value="<?= $product->product_id ?>" hidden>
+                                    <?= Html::endForm(); ?>
 							</div>
 						</div>
 						

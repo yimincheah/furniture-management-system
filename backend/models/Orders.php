@@ -113,4 +113,19 @@ class Orders extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OrderItems::className(), ['order_id' => 'id']);
     }
+
+    public static function getOrderStatusList()
+    {
+        return [
+            '0' => 'Processing',
+            '1' => 'Delivered',
+            '2' => 'Cancelled',
+        ];
+    }
+ 
+    public static function getOrderStatus($status)
+    {
+        $list = self::getOrderStatusList();
+        return $list[$status] ? $list[$status] : '';
+    }
 }

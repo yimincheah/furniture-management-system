@@ -112,6 +112,7 @@ use yii\bootstrap4\Html;
 													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 													<li><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
 													<li><?= Html::a('Manage Product', ['/products/index'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('Manage Order', ['/orders/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -191,6 +192,7 @@ use yii\bootstrap4\Html;
 											<li class="nav-item"><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
 											<li class="nav-item"><?= Html::a('Manage Category', ['/categorys/index'], ['class' => 'nav-link']) ?></li>
 											<li class="nav-item"><?= Html::a('Manage Product', ['/products/index'], ['class' => 'nav-link']) ?></li>
+											<li class="nav-item"><?= Html::a('Manage Order', ['/orders/index'], ['class' => 'nav-link']) ?></li>
 											
 										</ul>
 									</li>

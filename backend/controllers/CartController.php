@@ -111,7 +111,7 @@ class CartController extends Controller
             $model->order_id = Yii::$app->security->generateRandomString(12);
             $model->order_quantity = $session['cart.qty'];
             $model->total_price = $sum;
-            $model->order_status = 1;
+            $model->order_status = 0;
    
             if($model->save())
             {
@@ -145,8 +145,6 @@ class CartController extends Controller
             $model->quantity = $item['qty'];
             $model->total_price = $item['qty']*$item['product_price'];
             $model->save();
-            //print_r($model->getErrors());die();
-
         }
     }
 

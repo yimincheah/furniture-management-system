@@ -1,4 +1,5 @@
 <?php
+use kartik\mpdf\Pdf;
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -12,9 +13,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        // 'gridview' =>  [
-        //     'class' => '\kartik\grid\Module',
-        // ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+        ],
         'addressform' =>[
             'class' => \tonisormisson\addressform\Module::class,
         ],
@@ -76,6 +77,12 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'pdf' => [
+            'class' => Pdf::classname(),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+        ]
         
     ],
     'params' => $params,

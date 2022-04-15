@@ -118,12 +118,12 @@ use yii\bootstrap4\Html;
 									</li>
 									
 									<li class="panel mobile_menu_li">
-										<a href="#" class="mar-mobile">Product</a>
+										<a href="#" class="mar-mobile">Staff</a>
 											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category86" aria-expanded="false">
 											<span class="plus">+</span><span class="minus">-</span></a></span>
 											<div id="category86" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
 												<ul>
-													<li><?= Html::a('Manage Brand', ['/brands/index'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('Manage Staff', ['/staff/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -196,6 +196,13 @@ use yii\bootstrap4\Html;
 											
 										</ul>
 									</li>
+
+									<li class="nav-item"><a href="#" class="nav-link">Staff <i class="fa fa-angle-down"></i></a>
+										<ul class="dropdown-menu">
+											<li class="nav-item"><?= Html::a('Manage Staff', ['/staff/index'], ['class' => 'nav-link']) ?></li>		
+										</ul>
+									</li>
+
 								<?php } ?>
 								
 								<li class="nav-item"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id]) ?></li>

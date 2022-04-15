@@ -34,11 +34,9 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 					<div class="eb_right">
 						<!-- all -->
 						<div id="category" class="category">
-							<?php foreach($categories as $category) {?>	
-								<ul class="wow fadeInDown animated">  
-									<li><a href="index.php?r=product-list/index"><i class="fa fa-angle-right" aria-hidden="true"></i>ALL</a></li>
-								</ul>
-							<?php } ?>
+							<ul class="wow fadeInDown animated">  
+								<li><a href="index.php?r=product-list/index"><i class="fa fa-angle-right" aria-hidden="true"></i>ALL</a></li>
+							</ul>
 						</div>
 						<!-- all end-->
 						<!-- category -->

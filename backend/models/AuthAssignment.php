@@ -65,5 +65,10 @@ class AuthAssignment extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getProfile()
+    {
+        return $this->hasOne(Uploads::className(), ['upload_id' => 'user_id']);
+    }
+
   
 }

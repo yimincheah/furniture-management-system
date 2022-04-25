@@ -6,11 +6,10 @@ use kartik\select2\Select2;
 use kartik\switchinput\SwitchInput;
 use backend\models\Brands;
 use backend\models\Categorys;
-use backend\models\Products;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 
-$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 
 ?>
 <style>
@@ -100,7 +99,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     <?= $form->field($model, 'product_price')->textInput() ?>
 
     <?= 
-        $form->field($model, 'brand_id')->widget(Select2::classname(), [
+        $form->field($model, 'brand_id')->widget(Select2::class, [
         'data' =>  Brands::getBrandList(),
         'language' => 'en',
         'options' => ['placeholder' => 'Select a brand'],
@@ -111,7 +110,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     ?>
 
     <?= 
-        $form->field($model, 'category_id')->widget(Select2::classname(), [
+        $form->field($model, 'category_id')->widget(Select2::class, [
         'data' =>  Categorys::getCategoryList(),
         'language' => 'en',
         'options' => ['placeholder' => 'Select a category'],
@@ -122,7 +121,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     ?>
 
     <?=
-        $form->field($model, 'product_status')->widget(SwitchInput::classname(), [
+        $form->field($model, 'product_status')->widget(SwitchInput::class, [
             'value' => (isset($model->product_status) && $model->product_status == 'active') ? true : false,
             'pluginOptions' => [
                 'onText' => '<i class="fa fa-check"></i>',

@@ -127,6 +127,17 @@ use yii\bootstrap4\Html;
 												</ul>
 											</div>
 									</li>
+
+									<li class="panel mobile_menu_li">
+										<a href="#" class="mar-mobile">Schedule</a>
+											<span class="head"><a style="" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-category" href="#category87" aria-expanded="false">
+											<span class="plus">+</span><span class="minus">-</span></a></span>
+											<div id="category87" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
+												<ul>
+													<li><?= Html::a('View Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>
+												</ul>
+											</div>
+									</li>
 								
 									<li class="panel mobile_menu_li"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id], ['class' => 'mar-mobile']) ?></li>
 
@@ -200,6 +211,12 @@ use yii\bootstrap4\Html;
 									<li class="nav-item"><a href="#" class="nav-link">Staff <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
 											<li class="nav-item"><?= Html::a('Manage Staff', ['/staff/index'], ['class' => 'nav-link']) ?></li>		
+										</ul>
+									</li>
+
+									<li class="nav-item"><a href="#" class="nav-link">Schedule <i class="fa fa-angle-down"></i></a>
+										<ul class="dropdown-menu">
+											<li class="nav-item"><?= Html::a('View Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>		
 										</ul>
 									</li>
 

@@ -100,8 +100,10 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     <?= 
         $form->field($model, 'brand_id')->widget(Select2::class, [
+        'bsVersion' => '4.x',
         'data' =>  Brands::getBrandList(),
         'language' => 'en',
+        'size' => Select2::LARGE,
         'options' => ['placeholder' => 'Select a brand'],
         'pluginOptions' => [
             'allowClear' => true
@@ -111,8 +113,10 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     <?= 
         $form->field($model, 'category_id')->widget(Select2::class, [
+        'bsVersion' => '4.x',
         'data' =>  Categorys::getCategoryList(),
         'language' => 'en',
+        'size' => Select2::LARGE,
         'options' => ['placeholder' => 'Select a category'],
         'pluginOptions' => [
             'allowClear' => true

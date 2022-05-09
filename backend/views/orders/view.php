@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\Brands;
 use backend\models\Categorys;
-use backend\models\Products;
+use backend\models\Orders;
 use backend\models\UploadsProduct;
 
 $this->title = 'Order Details';
@@ -48,12 +48,12 @@ $this->title = 'Order Details';
                 [
                     'label' => 'Assigned To',
                     'attribute' =>'staff_id',
-                    'value' => ''
+                    'value' => 'staff.username'
                 ],
                 [
                     'attribute' => 'order_status',
                     'value' => function ($model) {
-                        return ($model['order_status'] == '1' ? 'Delivered' : 'Processing' );
+                        return Orders::getOrderStatus($model['order_status']);
                     },
                 ],
                 'order_quantity',

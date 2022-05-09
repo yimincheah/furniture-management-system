@@ -57,7 +57,6 @@ class OrderSearch extends Orders
         $query->andFilterWhere([
             'id' => $this->id,
             'post_code' => $this->post_code,
-            'staff_id' => $this->staff_id,
             'delivery_date' => $this->delivery_date,
             'order_status' => $this->order_status,
             'order_quantity' => $this->order_quantity,

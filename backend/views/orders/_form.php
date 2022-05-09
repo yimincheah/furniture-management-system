@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\switchinput\SwitchInput;
 use dosamigos\datepicker\DatePicker;
 
 $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
@@ -16,7 +15,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     <?= $form->field($model, 'order_id')->textInput(['maxlength' => true, 'disabled' => 'disabled']) ?>
 
     <?= $form->field($model, 'delivery_date')->widget(
-        DatePicker::className(), [
+        DatePicker::class, [
             'inline' => false, 
             'clientOptions' => [
                 'autoclose' => true,

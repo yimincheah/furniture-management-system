@@ -134,7 +134,8 @@ use yii\bootstrap4\Html;
 											<span class="plus">+</span><span class="minus">-</span></a></span>
 											<div id="category87" class="panel-collapse collapse" style="clear: both; height: 0px;" aria-expanded="false">
 												<ul>
-													<li><?= Html::a('View Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('View Schedule', ['/schedule/view'], ['class' => 'nav-link']) ?></li>
+													<li><?= Html::a('Manage Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>
 												</ul>
 											</div>
 									</li>
@@ -216,7 +217,8 @@ use yii\bootstrap4\Html;
 
 									<li class="nav-item"><a href="#" class="nav-link">Schedule <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
-											<li class="nav-item"><?= Html::a('View Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>		
+											<li class="nav-item"><?= Html::a('View Schedule', ['/schedule/view'], ['class' => 'nav-link']) ?></li>		
+											<li class="nav-item"><?= Html::a('Manage Schedule', ['/schedule/index'], ['class' => 'nav-link']) ?></li>		
 										</ul>
 									</li>
 

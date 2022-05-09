@@ -3,9 +3,11 @@
 namespace backend\controllers;
 
 use backend\models\Orders;
+use backend\models\OrderSearch;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use Yii;
 
 class ScheduleController extends Controller
 {
@@ -24,7 +26,19 @@ class ScheduleController extends Controller
 
     public function actionIndex()
     {
-        $orders = Orders::find()->all();
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->pagination->pageSize = (!empty($_GET['pageSize']) ? $_GET['pageSize'] : 10);
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionView()
+    {
+        $orders = Orders::find()->where(['order_status' => 0])->all();
 
         $tasks = [];
 
@@ -36,7 +50,7 @@ class ScheduleController extends Controller
             $tasks[] = $event;
         }
 
-        return $this->render('index',[
+        return $this->render('view',[
             'tasks'=> $tasks
         ]);
     }
@@ -55,5 +69,18 @@ class ScheduleController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 }

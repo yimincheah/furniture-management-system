@@ -5,7 +5,7 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Orders;
-
+use Yii;
 /**
  * OrderSearch represents the model behind the search form of `backend\models\Orders`.
  */
@@ -84,6 +84,29 @@ class OrderSearch extends Orders
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'address_line1', $this->address_line1])
             ->andFilterWhere(['like', 'address_line2', $this->address_line2]);
+
+        return $dataProvider;
+    }
+
+    public function searchStaffSchedule($params)
+    {
+        $query = Orders::find()->where(['staff_id'=>Yii::$app->user->id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        $query->joinWith('staff');
+
+        $query->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'delivery_date' ,$this->delivery_date])
+            ->andFilterWhere(['like', 'order_status', $this->order_status]);
 
         return $dataProvider;
     }

@@ -38,7 +38,7 @@ class ScheduleController extends Controller
 
     public function actionView()
     {
-        $orders = Orders::find()->where(['order_status' => 0])->all();
+        $orders = Orders::find()->all();
 
         $tasks = [];
 
@@ -47,6 +47,15 @@ class ScheduleController extends Controller
             $event->id = $order->id;
             $event->title = $order->order_id;
             $event->start = date('Y-m-d\TH:i:s\Z',strtotime($order->delivery_date));
+            if($order->order_status == 0){
+                $event->backgroundColor = 'blue';
+            }
+            else if($order->order_status == 1){
+                $event->backgroundColor = 'green';
+            }
+            else if($order->order_status == 2){
+                $event->backgroundColor = 'red';
+            }
             $tasks[] = $event;
         }
 

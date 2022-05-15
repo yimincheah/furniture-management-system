@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use backend\models\AuthAssignment;
 use backend\models\StaffSearch;
+use backend\models\Orders;
+use backend\models\OrderSearch;
 use backend\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,4 +97,73 @@ class StaffController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionSchedule()
+    {
+        $orders = Orders::find()->where(['staff_id'=>Yii::$app->user->id])->all();
+
+        $events = [];
+
+        foreach($orders as $order){
+            $event = new \yii2fullcalendar\models\Event();
+            $event->id = $order->id;
+            $event->title = $order->order_id;
+            $event->start = date('Y-m-d\TH:i:s\Z',strtotime($order->delivery_date));
+            if($order->order_status == 0){
+                $event->backgroundColor = 'blue';
+            }
+            else if($order->order_status == 1){
+                $event->backgroundColor = 'green';
+            }
+            else if($order->order_status == 2){
+                $event->backgroundColor = 'red';
+            }
+            $events[] = $event;
+        }
+
+        return $this->render('schedule',[
+            'events'=> $events
+        ]);
+    }
+
+    public function actionViewOrder($id)
+    {
+        return $this->render('view_order', [
+            'model' => $this->findOrder($id),
+        ]);
+    }
+
+    protected function findOrder($id)
+    {
+        if (($model = Orders::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionViewSchedule()
+    {
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->searchStaffSchedule(Yii::$app->request->queryParams);
+
+        return $this->render('view_schedule', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findOrder($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view-schedule']);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
 }

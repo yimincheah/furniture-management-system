@@ -41,13 +41,7 @@ $this->title = 'Order Information';
                 [
                     'label' => 'Assigned To',
                     'attribute' =>'staff_id',
-                    'value' => function ($model) {
-                        if($model->staff_id == null){
-                            return '-';
-                        }else{
-                            return $model->staff->username;
-                        }
-                    },
+                    'value' => $model->staff->username
                 ],
                 [
                     'attribute' => 'order_status',
@@ -69,11 +63,6 @@ $this->title = 'Order Information';
                 'created_at:datetime',
             ],
     ]) ?>
-
-    <p>
-        <?= Html::a('Update', ['update-schedule', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Cancel'), ['schedule', 'id' => $model->id], ['class'=>'btn', 'style' => 'background-color:black']) ?>
-    </p> 
 
     </div>
 </div>

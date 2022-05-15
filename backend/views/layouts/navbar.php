@@ -148,6 +148,8 @@ use yii\bootstrap4\Html;
 
 									<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('staff')) {?>
 
+										<li class="panel mobile_menu_li"><?= Html::a('Schedule', ['/staff/schedule'], ['class' => 'mar-mobile']) ?></li>
+
 										<li class="panel mobile_menu_li"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id], ['class' => 'mar-mobile']) ?></li>
 
 										<li class="panel mobile_menu_li"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post'], 'class' => 'mar-mobile']) ?></li>
@@ -223,7 +225,18 @@ use yii\bootstrap4\Html;
 									</li>
 
 								<?php } ?>
-								
+
+								<?php if(!Yii::$app->user->isGuest && Yii::$app->user->can('staff')) {?>
+
+									<li class="nav-item"><a href="#" class="nav-link">Schedule <i class="fa fa-angle-down"></i></a>
+										<ul class="dropdown-menu">
+											<li class="nav-item"><?= Html::a('View Schedule', ['/staff/schedule'], ['class' => 'nav-link']) ?></li>		
+											<li class="nav-item"><?= Html::a('Manage Schedule', ['/staff/view-schedule'], ['class' => 'nav-link']) ?></li>		
+										</ul>
+									</li>
+
+								<?php } ?>
+
 								<li class="nav-item"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id]) ?></li>
 
 								<li class="nav-item"><?= Html::a('Logout ('.Yii::$app->user->identity->username.')', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>

@@ -27,7 +27,7 @@ class m220323_034155_create_orders_table extends Migration
             'order_status' => $this->integer(),
             'order_quantity' => $this->integer(),
             'total_price' => $this->decimal(),
-            'created_at' => $this->integer()->notNull(),
+            'created_at' => $this->date()->notNull(),
         ]);
 
         $this->createIndex(

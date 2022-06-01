@@ -38,6 +38,9 @@ use yii\bootstrap4\Html;
 										<?= Html::a('Home', ['/'], ['class' => 'mar-mobile']) ?>
 									</li>
 									<li class="panel mobile_menu_li">
+										<?= Html::a('Statistic', ['/statistic/index'], ['class' => 'mar-mobile']) ?>
+									</li>
+									<li class="panel mobile_menu_li">
 										<?= Html::a('Furniture', ['/product-list/index'], ['class' => 'mar-mobile']) ?>
 									</li>
 									<li class="panel mobile_menu_li">
@@ -196,9 +199,13 @@ use yii\bootstrap4\Html;
 
 								<?php if(Yii::$app->user->can('admin')) { ?>
 
+									<li class="nav-item"><?= Html::a('Statistic', ['/statistic/index']) ?></li>
+
 									<li class="nav-item"><?= Html::a('Furniture', ['/product-list/index']) ?></li>
 
 									<li class="nav-item"><?= Html::a('Customer', ['/customers/index']) ?></li>
+
+									<li class="nav-item"><?= Html::a('Staff', ['/staff/index']) ?></li>
 
 									<li class="nav-item"><a href="#" class="nav-link">Management <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
@@ -208,12 +215,6 @@ use yii\bootstrap4\Html;
 											<li class="nav-item"><?= Html::a('Manage Product', ['/products/index'], ['class' => 'nav-link']) ?></li>
 											<li class="nav-item"><?= Html::a('Manage Order', ['/orders/index'], ['class' => 'nav-link']) ?></li>
 											
-										</ul>
-									</li>
-
-									<li class="nav-item"><a href="#" class="nav-link">Staff <i class="fa fa-angle-down"></i></a>
-										<ul class="dropdown-menu">
-											<li class="nav-item"><?= Html::a('Manage Staff', ['/staff/index'], ['class' => 'nav-link']) ?></li>		
 										</ul>
 									</li>
 

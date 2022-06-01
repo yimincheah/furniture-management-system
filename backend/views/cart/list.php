@@ -1,11 +1,9 @@
 <?php 
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use kartik\select2\Select2;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use backend\models\States;
 use backend\models\Customers;
 use backend\models\UploadsProduct;
 use dosamigos\datepicker\DatePicker;
@@ -46,6 +44,8 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 										$form->field($model, 'customer_id')->widget(Select2::classname(), [
 										'data' =>  ArrayHelper::map(Customers::find()->where(['customer_status' => 'active'])->all(),'customer_id','customer_name'),
 										'language' => 'en',
+										'bsVersion' => '4.x',
+										'size' => Select2::LARGE,
 										'options' => ['placeholder' => 'Select customer name ...','id'=>'customer_id'],
 										'pluginOptions' => [
 											'allowClear' => true

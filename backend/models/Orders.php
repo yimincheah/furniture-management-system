@@ -76,18 +76,18 @@ class Orders extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' =>  \yii\behaviors\TimestampBehavior::class,
-                'attributes' => [
-                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT =>  ['created_at'],
-                ],
-                'value' => function() { return date('U');} // unix timestamp ,
-            ],
-        ];
-    }
+    // public function behaviors()
+    // {
+    //     return [
+    //         'timestamp' => [
+    //             'class' =>  \yii\behaviors\TimestampBehavior::class,
+    //             'attributes' => [
+    //                 \yii\db\ActiveRecord::EVENT_BEFORE_INSERT =>  ['created_at'],
+    //             ],
+    //             'value' => function() { return date('U');} // unix timestamp ,
+    //         ],
+    //     ];
+    // }
 
     /**
      * Gets query for [[Customer]].

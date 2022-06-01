@@ -111,6 +111,7 @@ class CartController extends Controller
             $model->order_id = Yii::$app->security->generateRandomString(12);
             $model->order_quantity = $session['cart.qty'];
             $model->total_price = $sum;
+            $model->created_at = date('Y-m-d');
             $model->order_status = 0;
    
             if($model->save())

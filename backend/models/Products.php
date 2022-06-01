@@ -167,5 +167,8 @@ class Products extends \yii\db\ActiveRecord
 
     }
     
-
+    public function getOrderItems()
+    {
+        return $this->hasMany(OrderItems::className(), ['product_id' => 'product_id']);
+    }
 }

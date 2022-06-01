@@ -3,10 +3,109 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use backend\models\Orders;
+use kartik\export\ExportMenu;
 use dosamigos\datepicker\DatePicker;
+use kartik\date\DatePicker as Date2;
+//use jino5577\daterangepicker\DateRangePicker;
+use kartik\daterange\DateRangePicker;
+
 
 $this->title = 'Orders';
 $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+?>
+
+<style>
+
+</style>
+<?php
+
+
+$gridColumns = [
+    ['class' => 'yii\grid\SerialColumn'],
+
+    'order_id',
+    [
+        'label' => 'Customer Name',
+        'attribute'=>'customer_id',
+        'value'=> 'customer.customer_name',
+    ],
+    [
+        'attribute'=> 'delivery_date',
+        'value'=>'delivery_date',
+        'format'=>'raw',
+        'filter'=>DatePicker::widget([
+            'model' => $searchModel,
+            'attribute' => 'delivery_date',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd',
+                    'clearBtn' => true,
+                ],
+                'clientEvents' => [
+                    'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+                ],
+        ])
+
+    ],
+    [
+        'label' => 'Status',
+        'headerOptions' => ['style' => 'color:black'],
+        'filter' => Html::activeDropDownList($searchModel, 'order_status', Orders::getOrderStatusList(), ['prompt' => 'Status', 'class' => 'form-control']),
+        'content' => function ($model) {
+            return Orders::getOrderStatus($model['order_status']);
+        },
+        'contentOptions' => ['style' => 'white-space: nowrap;width: 120px'], 
+    ],
+    [
+        'attribute' => 'created_at',
+        'value' => 'created_at',
+        'format'=>'raw',
+        'filter'=>DatePicker::widget([
+            'model' => $searchModel,
+            'attribute' => 'created_at',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd',
+                    'clearBtn' => true,
+                ],
+                'clientEvents' => [
+                    'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+                ],
+        ])
+        
+    ],
+    [
+        'attribute' => 'total_price',
+        'format' => 'currency',
+        'pageSummary' => true
+    ],
+    [
+        'class' => yii\grid\ActionColumn::className(),
+        'header'=>'Actions',
+        'headerOptions' => ['style' => 'color:black'],
+        'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'], 
+    ],
+
+];
+
+$fullExportMenu = ExportMenu::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => $gridColumns,
+    'target' => ExportMenu::TARGET_BLANK,
+    'pjaxContainerId' => 'kv-pjax-container',
+    'showColumnSelector' => false,
+    'exportContainer' => [
+        'class' => 'btn-group mr-2 me-2'
+    ],
+    'dropdownOptions' => [
+        'label' => 'Full',
+        'class' => 'btn btn-outline-secondary btn-default',
+        'itemsBefore' => [
+            '<div class="dropdown-header">Export All Data</div>',
+        ],
+    ],
+]);
+
 ?>
 <!-- breadcrumb -->
 <section class="main_breadcrumb">
@@ -46,73 +145,23 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                     return ['class'=>'info'];
                 }
             },
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-
-                'order_id',
-                [
-                    'label' => 'Customer Name',
-                    'attribute'=>'customer_id',
-                    'value'=> 'customer.customer_name',
-                ],
-                [
-                    'attribute'=> 'delivery_date',
-                    'value'=>'delivery_date',
-                    'format'=>'raw',
-                    'filter'=>DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'delivery_date',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'yyyy-mm-dd',
-                                'clearBtn' => true,
-                            ],
-                            'clientEvents' => [
-                                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                            ],
-                    ])
-    
-                ],
-                [
-                    'label' => 'Status',
-                    'headerOptions' => ['style' => 'color:black'],
-                    'filter' => Html::activeDropDownList($searchModel, 'order_status', Orders::getOrderStatusList(), ['prompt' => 'Status', 'class' => 'form-control']),
-                    'content' => function ($model) {
-                        return Orders::getOrderStatus($model['order_status']);
-                    },
-                    'contentOptions' => ['style' => 'white-space: nowrap;width: 120px'], 
-                ],
-                [
-                    'attribute'=> 'created_at',
-                    'value'=>'created_at',
-                    'format'=>'datetime',
-                    'filter'=>DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'created_at',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd MM yyyy',
-                                'clearBtn' => true,
-                            ],
-                            'clientEvents' => [
-                                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                            ],
-                    ])
-                ],
-                [
-                    'attribute' => 'total_price',
-                    'format' => 'currency',
-                    'pageSummary' => true
-                ],
-                [
-                    'class' => yii\grid\ActionColumn::className(),
-                    'header'=>'Actions',
-                    'headerOptions' => ['style' => 'color:black'],
-                    'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'], 
-                ],
+            'columns' => $gridColumns,
+            'panel' => [
+                'type' => GridView::TYPE_PRIMARY,
             ],
+            'export' => [
+                'label' => 'Page',
+            ],
+            'exportContainer' => [
+                'class' => 'btn-group mr-2 me-2'
+            ],
+            'toolbar' => [
+                '{export}',
+                $fullExportMenu,
+            ]
         ]); ?>
         </div>
     </div>
 
 </div>
+

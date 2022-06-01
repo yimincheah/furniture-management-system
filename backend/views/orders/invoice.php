@@ -29,7 +29,7 @@ use backend\models\Brands;
         <b>Order ID      : </b> <?=$model->order_id ?> <br>
         <b>Delivery Date : </b> <?= $model->delivery_date?> <br>
         <b>Ordered Date  : </b>
-        <?= date("Y-m-d H:i:s", $model->created_at) ?>
+        <?= $model->created_at ?>
 
         <br><br>
 

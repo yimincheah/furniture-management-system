@@ -30,6 +30,8 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?= common\widgets\Alert::widget() ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -82,9 +84,27 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
             [
                 'class' => yii\grid\ActionColumn::class,
                 'header'=>'Actions',
-                'template' => '{update}',
+                'template' => '{update} {send}',
                 'headerOptions' => ['style' => 'color:black'],
-                'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'],  
+                'contentOptions' => ['style' => 'white-space: nowrap;width: 50px'],  
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return Html::a('<span class="fa fa-pencil"></span>', \yii\helpers\Url::to([
+                                            'schedule/update',
+                                            'id' => $model['id']
+                                        ])
+                        );
+                    },
+                    'send' => function ($url, $model, $key) {
+                        return
+                                Html::a('<span class="fa fa-send"></span>',  \yii\helpers\Url::to([
+                                    'schedule/send-notification',
+                                    'staff_id' => $model['staff_id'],
+                                    'id' => $model['id']
+                                ])
+                        );
+                    },
+                ]
             ],
         ],
     ]); ?>

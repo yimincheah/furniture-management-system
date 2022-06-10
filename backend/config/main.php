@@ -82,7 +82,19 @@ return [
             'format' => Pdf::FORMAT_A4,
             'orientation' => Pdf::ORIENT_PORTRAIT,
             'destination' => Pdf::DEST_BROWSER,
-        ]
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'yimincheah13@gmail.com',
+                'password' => 'dlsletvwkrbyrpij',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+            'useFileTransport' => false
+        ],
         
     ],
     'params' => $params,

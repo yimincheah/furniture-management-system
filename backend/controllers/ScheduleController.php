@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use backend\models\Orders;
 use backend\models\OrderSearch;
+use backend\models\Customers;
+use backend\models\User;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -11,6 +13,8 @@ use Yii;
 
 class ScheduleController extends Controller
 {
+
+    public $enableCsrfValidation = false;
 
     public function behaviors()
     {
@@ -85,11 +89,55 @@ class ScheduleController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            if($model->staff_id != null){
+                $staff = User::find()->where(['id' => $model->staff_id])->one();
+                $customer = Customers::find()->where(['customer_id' => $model->customer_id])->one();
+
+                $content = 'Hello '. $staff->username . ', Order ID: '. $model->order_id. ' need to be delivered on '. $model->delivery_date;
+                Yii::$app->mailer->compose()
+                ->setFrom(['yimincheah13@gmail.com' => 'Perabot Sg Besar'])
+                ->setTo($staff->email)
+                ->setSubject('Order Delivery')
+                ->setTextBody($content)
+                ->send();
+
+                $content2 = 'Hello '. $customer->customer_name . ', your order ID: '. $model->order_id. ' will be delivered on '. $model->delivery_date;
+                Yii::$app->mailer->compose()
+                ->setFrom(['yimincheah13@gmail.com' => 'Perabot Sg Besar'])
+                ->setTo($customer->customer_email)
+                ->setSubject('Order Delivery')
+                ->setTextBody($content2)
+                ->send();
+        
+                Yii::$app->session->setFlash('success','Email Send Successfully');
+            }
+
             return $this->redirect(['index']);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSendNotification($staff_id, $id){
+        
+        $model = User::find()->where(['id' => $staff_id])->one();
+        $order = Orders::find()->where(['id' => $id])->one();
+        $staff_name = $model->username;
+
+        $content = 'Hello '. $staff_name . ', Order ID: '. $order->order_id. ' need to be delivered on '. $order->delivery_date;
+        Yii::$app->mailer->compose()
+        ->setFrom(['yimincheah13@gmail.com' => 'Perabot Sg Besar'])
+        ->setTo($model->email)
+        ->setSubject('Order Delivery')
+        ->setTextBody($content)
+        ->send();
+
+        Yii::$app->session->setFlash('success','Email Send Successfully');
+
+        return $this->redirect(['schedule/index']);
+
     }
 }

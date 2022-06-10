@@ -132,6 +132,7 @@ $fullExportMenu = ExportMenu::widget([
 
         <div class="table-responsive">
         <?= GridView::widget([
+            'krajeeDialogSettings' => ['overrideYiiConfirm' => false, 'useNative' => true],
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'showPageSummary' => true,

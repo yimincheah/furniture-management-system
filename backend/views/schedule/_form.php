@@ -30,6 +30,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     <?= 
         $form->field($model, 'staff_id')->widget(Select2::class, [
         'bsVersion' => '4.x',
+        'id' => 'staff_id',
         'size' => Select2::LARGE,
         'data' =>  ArrayHelper::map(User::find()->where(['id'=>$id])->all(),'id','username'),
         'language' => 'en',

@@ -44,7 +44,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                         $model->permissions='admin';
                         ?>
 
-                        <?= $form->field($model,'permissions')->radioList($authItems); ?>
+                        <?= $form->field($model,'permissions')->radioList($authItems)->label(false); ?>
 
                         <div class="form-group">
                             <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

@@ -81,3 +81,8 @@ $this->title = 'Statistic';
         }
     }
 </script>
+
+"kartik-v/yii2-date-range": "dev-master",
+"jino5577/yii2-date-range-picker": "*",
+"kartik-v/yii2-field-range": "*",
+"kartik-v/yii2-widget-datepicker":"*",

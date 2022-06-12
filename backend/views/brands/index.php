@@ -1,14 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use backend\models\Brands;
 use dosamigos\datepicker\DatePicker;
 
-$this->title = 'Brands';
-$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->title = 'Brand';
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 
 ?>
 
@@ -18,10 +16,10 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
     <div class="container-fluid">
         <div class="row">
             <div class="breadcrumb-content">
-                <h2>Brands</h2>
+                <h2>Brand</h2>
                 <ul>
                     <li><?= Html::a('Home', ['/']) ?></li>
-                    <li><?= Html::a('Brands', ['/brands/index']) ?></li>
+                    <li><?= Html::a('Brand', ['/brands/index']) ?></li>
                 </ul>
             </div>
         </div>
@@ -29,10 +27,10 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 </section>
 
 <div class="container" id="content">
-    
+
     <?= common\widgets\Alert::widget() ?>
 
-   <div class="container-fluid">
+    <div class="container-fluid">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p>
@@ -43,12 +41,6 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
-            'rowOptions'=>function($model){
-                if($model->brand_status == 'inactive')
-                {
-                    return ['class'=>'danger'];
-                }
-            },
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
@@ -58,53 +50,57 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                     'headerOptions' => ['style' => 'color:black'],
                     'filter' => Html::activeDropDownList($searchModel, 'brand_status', Brands::getBrandStatusList(), ['prompt' => 'Status', 'class' => 'form-control']),
                     'content' => function ($model) {
-                        return Brands::getBrandStatus($model['brand_status']);
+                        if ($model->brand_status == 'inactive') {
+                            return '<span class="badge btn-danger">' . Brands::getBrandStatus($model['brand_status']) . '<spnn>';
+                        } else if ($model->brand_status == 'active') {
+                            return '<span class="badge btn-success">' . Brands::getBrandStatus($model['brand_status']) . '<spnn>';
+                        }
                     },
                 ],
                 [
-                    'attribute'=> 'created_at',
-                    'value'=>'created_at',
-                    'format'=>'datetime',
-                    'filter'=>DatePicker::widget([
+                    'attribute' => 'created_at',
+                    'value' => 'created_at',
+                    'format' => 'datetime',
+                    'filter' => DatePicker::widget([
                         'model' => $searchModel,
                         'attribute' => 'created_at',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd MM yyyy',
-                                'clearBtn' => true,
-                            ],
-                            'clientEvents' => [
-                                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                            ],
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd MM yyyy',
+                            'clearBtn' => true,
+                        ],
+                        'clientEvents' => [
+                            'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+                        ],
                     ])
-    
+
                 ],
                 [
-                    'attribute'=> 'updated_at',
-                    'value'=>'updated_at',
-                    'format'=>'datetime',
-                    'filter'=>DatePicker::widget([
+                    'attribute' => 'updated_at',
+                    'value' => 'updated_at',
+                    'format' => 'datetime',
+                    'filter' => DatePicker::widget([
                         'model' => $searchModel,
                         'attribute' => 'updated_at',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd MM yyyy',
-                                'clearBtn' => true,
-                            ],
-                            'clientEvents' => [
-                                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                            ],
-                           
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd MM yyyy',
+                            'clearBtn' => true,
+                        ],
+                        'clientEvents' => [
+                            'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+                        ],
+
                     ])
-    
+
                 ],
                 [
-                    'class' => yii\grid\ActionColumn::className(),
-                    'header'=>'Actions',
+                    'class' => yii\grid\ActionColumn::class,
+                    'header' => 'Actions',
                     'headerOptions' => ['style' => 'color:black'],
                     'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'],
-                    'template'=>' {update}  {delete}',
-                    
+                    'template' => ' {update}  {delete}',
+
                 ],
 
             ],
@@ -112,6 +108,3 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     </div>
 </div>
-
-
-

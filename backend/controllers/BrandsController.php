@@ -4,11 +4,12 @@ namespace backend\controllers;
 
 use backend\models\Brands;
 use backend\models\BrandSearch;
-use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+
 /**
  * BrandsController implements the CRUD actions for Brands model.
  */
@@ -23,12 +24,22 @@ class BrandsController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
                 ],
-                
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['view', 'update', '_form', 'index', 'create', 'delete'],
+                            'allow' => true,
+                            'roles' => ['admin'],
+                        ],
+                    ],
+                ],
+
             ]
         );
     }
@@ -65,12 +76,11 @@ class BrandsController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', "Brand is created successfully."); 
+                Yii::$app->session->setFlash('success', "Brand is created successfully.");
                 return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
-
         }
 
         return $this->render('create', [
@@ -90,7 +100,7 @@ class BrandsController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Brand is updated successfully."); 
+            Yii::$app->session->setFlash('success', "Brand is updated successfully.");
             return $this->redirect(['index']);
         }
 
@@ -109,7 +119,7 @@ class BrandsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', "Brand is deleted successfully."); 
+        Yii::$app->session->setFlash('success', "Brand is deleted successfully.");
         return $this->redirect(['index']);
     }
 

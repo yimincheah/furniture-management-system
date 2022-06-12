@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use backend\models\Customers;
 
 $this->title = 'Customer';
-$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 ?>
 
 <!-- breadcrumb -->

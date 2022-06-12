@@ -33,7 +33,7 @@ class CustomersController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['view','update','_form','index','_search','create','delete'],
+                            'actions' => ['view','update','_form','index','city','create','delete'],
                             'allow' => true,
                             'roles' => ['admin'],
                         ],

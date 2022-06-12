@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use backend\models\Customers;
 
@@ -40,12 +38,6 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'rowOptions'=>function($model){
-                    if($model->customer_status == 'inactive')
-                    {
-                        return ['class'=>'danger'];
-                    }
-                },
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     'customer_name',
@@ -54,18 +46,22 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                         'headerOptions' => ['style' => 'color:black'],
                         'filter' => Html::activeDropDownList($searchModel, 'customer_status', Customers::getCustomerStatusList(), ['prompt' => 'Status', 'class' => 'form-control']),
                         'content' => function ($model) {
-                            return Customers::getCustomerStatus($model['customer_status']);
+                            if($model->customer_status == 'inactive')
+                            {
+                                return'<span class="badge btn-danger">'.Customers::getCustomerStatus($model['customer_status']).'<spnn>';
+                            }
+                            else if($model->customer_status == 'active'){
+                                return '<span class="badge btn-success">'.Customers::getCustomerStatus($model['customer_status']).'<spnn>';
+                            }
                         },
                     ],
                     'customer_email:email',
                     'customer_contact',
                     [
-                        'class' => yii\grid\ActionColumn::className(),
+                        'class' => yii\grid\ActionColumn::class,
                         'header'=>'Actions',
                         'headerOptions' => ['style' => 'color:black'],
                         'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'],
-                    
-                        
                     ],
                 ],
             ]); ?>

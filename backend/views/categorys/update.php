@@ -2,9 +2,6 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Categorys */
-
 $this->title = 'Update Category'
 ?>
 <!-- breadcrumb -->
@@ -23,7 +20,7 @@ $this->title = 'Update Category'
 </section>
 
 <div class="container" id="content">
-   <div class="container-fluid">
+    <div class="container-fluid">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <?= $this->render('_form', [

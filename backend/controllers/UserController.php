@@ -4,15 +4,14 @@ namespace backend\controllers;
 
 use backend\models\User;
 use backend\models\Uploads;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use yii\helpers\Json;
 use yii\helpers\BaseFileHelper;
 use yii\helpers\Url;
 use yii\helpers\html;
+use yii\filters\AccessControl;
 use Yii;
 /**
  * UserController implements the CRUD actions for User model.
@@ -28,9 +27,19 @@ class UserController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['view','update','_form'],
+                            'allow' => true,
+                            'roles' => ['admin','staff'],
+                        ],
                     ],
                 ],
             ]
@@ -72,11 +81,11 @@ class UserController extends Controller
                 $this->Uploads(false);
     
                 if($model->save()){
-                     return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
     
             } else {
-                 $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(),10);
+                $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(),10);
             }
 
         }
@@ -88,11 +97,10 @@ class UserController extends Controller
                 $this->Uploads(false);
     
                 if($model->save()){
-                     return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
         }
-       
         return $this->render('update', [
             'model' => $model,
             'initialPreview'=>empty($initialPreview)? '' : $initialPreview,
@@ -117,9 +125,9 @@ class UserController extends Controller
     }
 
 
-  /*|*********************************************************************************|
-  |================================ Upload Ajax ====================================|
-  |*********************************************************************************|*/
+/*|*********************************************************************************|
+|================================ Upload Ajax ====================================|
+|*********************************************************************************|*/
 
     public function actionUploadAjax()
     {   
@@ -145,48 +153,47 @@ class UserController extends Controller
     private function Uploads($isAjax=false) 
     {
         if (Yii::$app->request->isPost) {
-           $images = UploadedFile::getInstancesByName('upload_ajax');
-           
-           if ($images) {
+            $images = UploadedFile::getInstancesByName('upload_ajax');
+    
+            if ($images) {
 
-               if($isAjax===true){
-                   $ref =Yii::$app->request->post('ref');
-               }else{
-                   $photoUser = Yii::$app->request->post('User');
-                   $ref = $photoUser['ref'];
-               }
-               
-               $this->CreateDir($ref);
+                if($isAjax===true){
+                    $ref =Yii::$app->request->post('ref');
+                }else{
+                    $photoUser = Yii::$app->request->post('User');
+                    $ref = $photoUser['ref'];
+                }
+        
+                $this->CreateDir($ref);
 
-               foreach ($images as $file){
-                   $fileName       = $file->baseName . '.' . $file->extension;
-                   $realFileName   = md5($file->baseName.time()) . '.' . $file->extension;
-                   $savePath       = User::UPLOAD_FOLDER.'/'.$ref.'/'. $realFileName;
-                   if($file->saveAs($savePath)){
+                foreach ($images as $file){
+                    $fileName       = $file->baseName . '.' . $file->extension;
+                    $realFileName   = md5($file->baseName.time()) . '.' . $file->extension;
+                    $savePath       = User::UPLOAD_FOLDER.'/'.$ref.'/'. $realFileName;
+                    if($file->saveAs($savePath)){
 
-                       if($this->isImage(Url::base(true).'/'.$savePath)){
+                        if($this->isImage(Url::base(true).'/'.$savePath)){
                             $this->createThumbnail($ref,$realFileName);
-                       }
-                     
-                       $model                  = new Uploads;
-                       $model->ref             = $ref;
-                       $model->file_name       = $fileName;
-                       $model->real_filename   = $realFileName;
-                       $model->save(); 
+                        }
+            
+                        $model                  = new Uploads;
+                        $model->ref             = $ref;
+                        $model->file_name       = $fileName;
+                        $model->real_filename   = $realFileName;
+                        $model->save(); 
 
-                       if($isAjax===true){
-                           echo json_encode(['success' => 'true']);
-                       }
-                       
-                   }else{
-                       if($isAjax===true){
-                           echo json_encode(['success'=>'false','eror'=>$file->error]);
-                       }
-                   }
-                   
-               }
-           }
-       }
+                        if($isAjax===true){
+                            echo json_encode(['success' => 'true']);
+                        }
+                        
+                    }else{
+                        if($isAjax===true){
+                            echo json_encode(['success'=>'false','eror'=>$file->error]);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private function getInitialPreview($ref) 
@@ -219,8 +226,8 @@ class UserController extends Controller
             $file = Html::img($filePath,['class'=>'file-preview-image', 'alt'=>$model->file_name, 'title'=>$model->file_name]);
         }else{
             $file =  "<div class='file-preview-other'> " .
-                     "<h2><i class='glyphicon glyphicon-file'></i></h2>" .
-                     "</div>";
+                        "<h2><i class='glyphicon glyphicon-file'></i></h2>" .
+                        "</div>";
         }
         return $file;
     }
@@ -248,11 +255,8 @@ class UserController extends Controller
                 echo json_encode(['success'=>false]);
             }
         }else{
-          echo json_encode(['success'=>false]);  
+            echo json_encode(['success'=>false]);  
         }
-    }
-      
-
-    
+    }  
 }
 

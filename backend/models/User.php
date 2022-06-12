@@ -42,13 +42,14 @@ class User extends \yii\db\ActiveRecord
         return [
             [['username', 'auth_key', 'password_hash', 'email'], 'required'],
             [['status'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'contactNo', 'ref'], 'string', 'max' => 255],
+            [['username', 'password_hash', 'password_reset_token', 'verification_token', 'contactNo', 'ref'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['email'], 'email'],
             [['created_at', 'updated_at'], 'safe'],
             [['password_reset_token','ref'], 'unique'],
-            [['contactNo'], PhoneInputValidator::className()], 
+            [['contactNo'], PhoneInputValidator::class], 
         ];
     }
 
@@ -113,11 +114,11 @@ class User extends \yii\db\ActiveRecord
 
     public function getUploads()
     {
-        return $this->hasMany(Uploads::className(), ['ref' => 'ref']);
+        return $this->hasMany(Uploads::class, ['ref' => 'ref']);
     }
 
     public function getOrders()
     {
-        return $this->hasMany(Orders::className(), ['staff_id' => 'id']);
+        return $this->hasMany(Orders::class, ['staff_id' => 'id']);
     }
 }

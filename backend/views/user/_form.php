@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
-use yii\helpers\Url;
 use borales\extensions\phoneInput\PhoneInput;
 
 $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
@@ -29,8 +28,6 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                         'initialPreviewShowDelete'=>true,
                         'initialPreview'=> $initialPreview,
                         'initialPreviewConfig'=> $initialPreviewConfig,
-                        //'uploadUrl' => Url::to('index.php?r=user/upload-ajax'),
-                        //'deleteUrl' => Url::to('index.php?r=user/deletefile-ajax'),
                         'uploadExtraData' => [
                             'ref' => $model->ref,
                         ],
@@ -47,12 +44,11 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                         'overwriteInitial' => false,
                         'browseClass' => 'btn btn-success',
                         'browseIcon' => '<i class="fa fa-camera"></i> ',
-                        'browseLabel' => 'Select',
+                        'browseLabel' => 'Upload',
                         'allowedFileExtensions' => ['jpg', 'gif', 'png', 'jpeg'],
                         'layoutTemplates' => [
                             'actions' => '<div class="file-actions"><div class="file-footer-buttons">{delete} {zoom} </div> <div class="clearfix"></div></div>',
                             'actionDelete' => '<button type="button" class="kv-file-remove btn-sm btn-kv btn-default btn-outline-secondary" title="{removeTitle}"{dataUrl}{dataKey}>{removeIcon}</button>',
-                            //'actionUpload' => '<button type="button" class="kv-file-upload btn-sm btn-kv btn-default btn-outline-secondary" title="{uploadTitle}">{uploadIcon}</button>',
                             'actionZoom' => '<button type="button" class="kv-file-zoom btn-sm btn-kv btn-default btn-outline-secondary" title="{zoomTitle}">{zoomIcon}</button>',
                             'modalMain' => '<div id="kvFileinputModal" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="kvFileinputModalLabel"></div>',
                             'modal' => '<div class="modal-dialog modal-lg" role="document">
@@ -77,10 +73,9 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                                 $(this).fileinput("upload");
                             }
                             else{
-                               return false;
+                                return false;
                             }
                         }', 
-                      
                     ]  
                         
         ]);
@@ -94,7 +89,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     <label>Contact No</label>
     <?= $form->field($model, 'contactNo')->widget(
-        PhoneInput::className(), [
+        PhoneInput::class, [
         'jsOptions' => [
             'preferredCountries' =>['my'],
         ],
@@ -113,3 +108,11 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
 </div>
 
+<?php
+$this->registerJs(<<<SCRIPT
+
+    $(".error-summary").hide();
+
+SCRIPT
+        , \yii\web\View::POS_LOAD
+);

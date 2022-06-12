@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Profile'
+$this->title = 'Update Profile'
 ?>
 <!-- breadcrumb -->
 <section class="main_breadcrumb">
@@ -20,7 +20,7 @@ $this->title = 'Profile'
 </section>
 
 <div class="container" id="content">
-   <div class="container-fluid">
+    <div class="container-fluid">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <?= $this->render('_form', [

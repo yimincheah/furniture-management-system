@@ -22,7 +22,7 @@ $this->title = 'Profile';
 </section>
 
 <div class="container" id="content">
-   <div class="container-fluid">
+    <div class="container-fluid">
 
         <h1><?= Html::encode($this->title) ?></h1>
 

@@ -31,7 +31,7 @@ class UploadsProduct extends \yii\db\ActiveRecord
     {
         return [
             [['file_name', 'real_filename', 'ref'], 'required'],
-            [['created_at'], 'safe'],
+            [['created_at','updated_at'], 'safe'],
             [['file_name', 'real_filename', 'ref'], 'string', 'max' => 255],
         ];
     }
@@ -42,7 +42,8 @@ class UploadsProduct extends \yii\db\ActiveRecord
             'timestamp' => [
                 'class' =>  \yii\behaviors\TimestampBehavior::class,
                 'attributes' => [
-                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT =>  ['created_at'],  
+                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT =>  ['created_at'], 
+                    \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'], 
                 ],
                 'value' => function() { return date('U');} 
             ],

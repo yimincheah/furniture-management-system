@@ -11,6 +11,7 @@ use backend\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * StaffController implements the CRUD actions for AuthAssignment model.
@@ -24,9 +25,24 @@ class StaffController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['view','update','_form','index','schedule','delete', 'view-order'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['schedule','view-order','view-schedule','update'],
+                        'allow' => true,
+                        'roles' => ['staff'],
+                    ],
                 ],
             ],
         ];

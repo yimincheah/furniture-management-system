@@ -10,7 +10,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
+use yii\filters\AccessControl;
 use Yii;
+
 /**
  * OrdersController implements the CRUD actions for Orders model.
  */
@@ -25,9 +27,19 @@ class OrdersController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['view', 'update', '_form', 'index', 'delete', 'print-invoice'],
+                            'allow' => true,
+                            'roles' => ['admin'],
+                        ],
                     ],
                 ],
             ]
@@ -43,11 +55,13 @@ class OrdersController extends Controller
     {
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider2 = $searchModel->searchAll($this->request->queryParams);
         $dataProvider->pagination->pageSize = (!empty($_GET['pageSize']) ? $_GET['pageSize'] : 10);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProvider2' => $dataProvider2,
         ]);
     }
 
@@ -59,16 +73,16 @@ class OrdersController extends Controller
      */
     public function actionView($id)
     {
-        $order = Orderitems::find()->where(['order_id'=>$id])->asArray()->all();
+        $order = Orderitems::find()->where(['order_id' => $id])->asArray()->all();
 
-        foreach($order as $key => $items){
-            $product[] = Products::find()->where(['product_id'=>$items['product_id']])->asArray()->all();
+        foreach ($order as $key => $items) {
+            $product[] = Products::find()->where(['product_id' => $items['product_id']])->asArray()->all();
         }
 
         return $this->render('view', [
             'model' => $this->findModel($id),
             'product' => $product,
-            'order'=>$order
+            'order' => $order
         ]);
     }
 
@@ -84,7 +98,7 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Order is updated successfully."); 
+            Yii::$app->session->setFlash('success', "Order is updated successfully.");
             return $this->redirect(['index']);
         }
 
@@ -102,11 +116,11 @@ class OrdersController extends Controller
      */
     public function actionDelete($id)
     {
-        OrderItems::deleteAll(['order_id'=>$id]);
+        OrderItems::deleteAll(['order_id' => $id]);
 
         $this->findModel($id)->delete();
 
-        Yii::$app->session->setFlash('success', "Order is deleted successfully."); 
+        Yii::$app->session->setFlash('success', "Order is deleted successfully.");
 
         return $this->redirect(['index']);
     }
@@ -129,28 +143,29 @@ class OrdersController extends Controller
 
     public function actionPrintInvoice($id)
     {
-        $orders = OrderItems::find()->where(['order_id'=>$id])->asArray()->all();
-        foreach($orders as $key => $item){
-            $products[] = Products::find()->where(['product_id'=>$item['product_id']])->asArray()->all(); 
+        $orders = OrderItems::find()->where(['order_id' => $id])->asArray()->all();
+        foreach ($orders as $key => $item) {
+            $products[] = Products::find()->where(['product_id' => $item['product_id']])->asArray()->all();
         }
 
-        $content = $this->renderPartial('invoice',[
+        $content = $this->renderPartial('invoice', [
             'model' => $this->findModel($id),
             'products' => $products,
-            'orders'=>$orders
+            'orders' => $orders
         ]);
 
         $pdf = new Pdf([
-            'mode' => Pdf::MODE_CORE, 
-            'format' => Pdf::FORMAT_A4, 
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
-            'destination' => Pdf::DEST_BROWSER, 
-            'content' => $content,  
+            'mode' => Pdf::MODE_CORE,
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $content,
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
-            'cssInline' => '.kv-heading-1{font-size:18px}', 
-            'methods' => [ 
-                'SetHeader'=>['PERABOT SG BESAR'], 
-                'SetFooter'=>[' 
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            'methods' => [
+                'SetHeader' => ['PERABOT SG BESAR'],
+                'SetFooter' => [
+                    ' 
                     Perabot Sg Besar <br>
                     No 10-18, Jalan Sbbc 6, <br>
                     45300 Sungai Besar <br>
@@ -160,7 +175,6 @@ class OrdersController extends Controller
             ]
         ]);
 
-        return $pdf->render(); 
-        
+        return $pdf->render();
     }
 }

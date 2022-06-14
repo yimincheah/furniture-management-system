@@ -20,7 +20,7 @@ $this->title = 'Update Order';
 </section>
 
 <div class="container" id="content">
-   <div class="container-fluid">
+    <div class="container-fluid">
         <h1><?= Html::encode($this->title) ?></h1>
 
         <?= $this->render('_form', [
@@ -29,4 +29,3 @@ $this->title = 'Update Order';
 
     </div>
 </div>
-

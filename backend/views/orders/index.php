@@ -5,13 +5,9 @@ use kartik\grid\GridView;
 use backend\models\Orders;
 use kartik\export\ExportMenu;
 use dosamigos\datepicker\DatePicker;
-use kartik\date\DatePicker as Date2;
-//use jino5577\daterangepicker\DateRangePicker;
-use kartik\daterange\DateRangePicker;
-
 
 $this->title = 'Orders';
-$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 ?>
 
 <style>
@@ -26,24 +22,24 @@ $gridColumns = [
     'order_id',
     [
         'label' => 'Customer Name',
-        'attribute'=>'customer_id',
-        'value'=> 'customer.customer_name',
+        'attribute' => 'customer_id',
+        'value' => 'customer.customer_name',
     ],
     [
-        'attribute'=> 'delivery_date',
-        'value'=>'delivery_date',
-        'format'=>'raw',
-        'filter'=>DatePicker::widget([
+        'attribute' => 'delivery_date',
+        'value' => 'delivery_date',
+        'format' => 'raw',
+        'filter' => DatePicker::widget([
             'model' => $searchModel,
             'attribute' => 'delivery_date',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd',
-                    'clearBtn' => true,
-                ],
-                'clientEvents' => [
-                    'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                ],
+            'clientOptions' => [
+                'autoclose' => true,
+                'format' => 'yyyy-mm-dd',
+                'clearBtn' => true,
+            ],
+            'clientEvents' => [
+                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+            ],
         ])
 
     ],
@@ -54,25 +50,25 @@ $gridColumns = [
         'content' => function ($model) {
             return Orders::getOrderStatus($model['order_status']);
         },
-        'contentOptions' => ['style' => 'white-space: nowrap;width: 120px'], 
+        'contentOptions' => ['style' => 'white-space: nowrap;width: 120px'],
     ],
     [
         'attribute' => 'created_at',
         'value' => 'created_at',
-        'format'=>'raw',
-        'filter'=>DatePicker::widget([
+        'format' => 'raw',
+        'filter' => DatePicker::widget([
             'model' => $searchModel,
             'attribute' => 'created_at',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd',
-                    'clearBtn' => true,
-                ],
-                'clientEvents' => [
-                    'clearDate' => 'function (e) {$(e.target).find("input").change();}',
-                ],
+            'clientOptions' => [
+                'autoclose' => true,
+                'format' => 'yyyy-mm-dd',
+                'clearBtn' => true,
+            ],
+            'clientEvents' => [
+                'clearDate' => 'function (e) {$(e.target).find("input").change();}',
+            ],
         ])
-        
+
     ],
     [
         'attribute' => 'total_price',
@@ -80,16 +76,15 @@ $gridColumns = [
         'pageSummary' => true
     ],
     [
-        'class' => yii\grid\ActionColumn::className(),
-        'header'=>'Actions',
+        'class' => yii\grid\ActionColumn::class,
+        'header' => 'Actions',
         'headerOptions' => ['style' => 'color:black'],
-        'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'], 
+        'contentOptions' => ['style' => 'white-space: nowrap;width: 80px'],
     ],
-
 ];
 
 $fullExportMenu = ExportMenu::widget([
-    'dataProvider' => $dataProvider,
+    'dataProvider' => $dataProvider2,
     'columns' => $gridColumns,
     'target' => ExportMenu::TARGET_BLANK,
     'pjaxContainerId' => 'kv-pjax-container',
@@ -131,38 +126,41 @@ $fullExportMenu = ExportMenu::widget([
         <h1><?= Html::encode($this->title) ?></h1>
 
         <div class="table-responsive">
-        <?= GridView::widget([
-            'krajeeDialogSettings' => ['overrideYiiConfirm' => false, 'useNative' => true],
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'showPageSummary' => true,
-            'rowOptions'=>function($model){
-                if($model->order_status == '2')
-                {
-                    return ['class'=>'danger'];
-                }
-                if($model->order_status == '0')
-                {
-                    return ['class'=>'info'];
-                }
-            },
-            'columns' => $gridColumns,
-            'panel' => [
-                'type' => GridView::TYPE_PRIMARY,
-            ],
-            'export' => [
-                'label' => 'Page',
-            ],
-            'exportContainer' => [
-                'class' => 'btn-group mr-2 me-2'
-            ],
-            'toolbar' => [
-                '{export}',
-                $fullExportMenu,
-            ]
-        ]); ?>
+            <?= GridView::widget([
+                'krajeeDialogSettings' => ['overrideYiiConfirm' => false, 'useNative' => true],
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'showPageSummary' => true,
+                'rowOptions' => function ($model) {
+                    if ($model->order_status == '2') {
+                        return ['class' => 'danger'];
+                    }
+                    if ($model->order_status == '0') {
+                        return ['class' => 'info'];
+                    }
+                },
+                'columns' => $gridColumns,
+                'panel' => [
+                    'type' => GridView::TYPE_PRIMARY,
+                ],
+                'export' => [
+                    'label' => 'Page',
+                ],
+                'exportConfig' => [
+                    GridView::CSV => true,
+                    GridView::HTML => true,
+                    GridView::TEXT => true,
+                    GridView::EXCEL => true,
+                ],
+                'exportContainer' => [
+                    'class' => 'btn-group mr-2 me-2'
+                ],
+                'toolbar' => [
+                    '{export}',
+                    $fullExportMenu,
+                ]
+            ]); ?>
         </div>
     </div>
 
 </div>
-

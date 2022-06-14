@@ -42,13 +42,13 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'country', 'address_line1'], 'required'],
+            [['order_id', 'country', 'address_line1', 'order_status', 'state', 'city'], 'required'],
             [['post_code', 'customer_id', 'staff_id', 'order_status', 'order_quantity'], 'integer'],
-            [['delivery_date','created_at'], 'safe'],
+            [['delivery_date', 'created_at'], 'safe'],
             [['total_price'], 'number'],
             [['order_id', 'country', 'address_line1', 'address_line2', 'state', 'city'], 'string', 'max' => 255],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
-            [['staff_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['staff_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::class, 'targetAttribute' => ['customer_id' => 'customer_id']],
+            [['staff_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['staff_id' => 'id']],
         ];
     }
 
@@ -76,19 +76,6 @@ class Orders extends \yii\db\ActiveRecord
         ];
     }
 
-    // public function behaviors()
-    // {
-    //     return [
-    //         'timestamp' => [
-    //             'class' =>  \yii\behaviors\TimestampBehavior::class,
-    //             'attributes' => [
-    //                 \yii\db\ActiveRecord::EVENT_BEFORE_INSERT =>  ['created_at'],
-    //             ],
-    //             'value' => function() { return date('U');} // unix timestamp ,
-    //         ],
-    //     ];
-    // }
-
     /**
      * Gets query for [[Customer]].
      *
@@ -96,7 +83,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(Customers::className(), ['customer_id' => 'customer_id']);
+        return $this->hasOne(Customers::class, ['customer_id' => 'customer_id']);
     }
 
     /**
@@ -106,12 +93,12 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getStaff()
     {
-        return $this->hasOne(User::className(), ['id' => 'staff_id']);
+        return $this->hasOne(User::class, ['id' => 'staff_id']);
     }
 
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::className(), ['order_id' => 'id']);
+        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
     }
 
     public static function getOrderStatusList()
@@ -122,7 +109,7 @@ class Orders extends \yii\db\ActiveRecord
             '2' => 'Cancelled',
         ];
     }
- 
+
     public static function getOrderStatus($status)
     {
         $list = self::getOrderStatusList();

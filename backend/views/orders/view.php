@@ -48,7 +48,7 @@ $this->title = 'Order Details';
                 [
                     'label' => 'Assigned To',
                     'attribute' =>'staff_id',
-                    'value' => 'staff.username'
+                    'value' => $model->staff->username
                 ],
                 [
                     'attribute' => 'order_status',

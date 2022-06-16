@@ -1,5 +1,7 @@
 <?php
+
 use kartik\mpdf\Pdf;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -15,10 +17,7 @@ return [
     'modules' => [
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
-        ],
-        'addressform' =>[
-            'class' => \tonisormisson\addressform\Module::class,
-        ],
+        ]
     ],
     'components' => [
         'request' => [
@@ -45,19 +44,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        
-        // 'urlManager' => [
-        //     'enablePrettyUrl' => true,
-        //     'showScriptName' => false,
-        //     'rules' => [
-        //     ],
-        // ],
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
         'assetManager' => [
             'bundles' => [
                 'kartik\form\ActiveFormAsset' => [
                     'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
                 ],
-               
+
             ],
         ],
         'formatter' => [
@@ -71,14 +70,14 @@ return [
             'thousandSeparator' => ',',
         ],
         'image' => [
-                'class' => 'yii\image\ImageDriver',
-                'driver' => 'GD', 
+            'class' => 'yii\image\ImageDriver',
+            'driver' => 'GD',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'pdf' => [
-            'class' => Pdf::classname(),
+            'class' => Pdf::class,
             'format' => Pdf::FORMAT_A4,
             'orientation' => Pdf::ORIENT_PORTRAIT,
             'destination' => Pdf::DEST_BROWSER,
@@ -95,7 +94,7 @@ return [
             ],
             'useFileTransport' => false
         ],
-        
+
     ],
     'params' => $params,
 ];

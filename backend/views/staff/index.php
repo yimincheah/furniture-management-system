@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use backend\models\Uploads;
 
 $this->title = 'Staff';
-
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 ?>
 <!-- breadcrumb -->
 <section class="main_breadcrumb">

@@ -10,7 +10,7 @@
  *     'environment name' => [
  *         'path' => 'directory storing the local files',
  *         'skipFiles'  => [
- *             // list of files that should only be copied once and skipped if they already exist
+ *             // list of files that should only copied once and skipped if they already exist
  *         ],
  *         'setWritable' => [
  *             // list of directories that should be set writable
@@ -34,17 +34,15 @@ return [
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
-            'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
         ],
         'setExecutable' => [
             'yii',
-            'yii_test',
+            'tests/codeception/bin/yii',
         ],
         'setCookieValidationKey' => [
             'backend/config/main-local.php',
-            'common/config/codeception-local.php',
             'frontend/config/main-local.php',
         ],
     ],
@@ -53,7 +51,22 @@ return [
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
-            'console/runtime',
+            'frontend/runtime',
+            'frontend/web/assets',
+        ],
+        'setExecutable' => [
+            'yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+        ],
+    ],
+    'Heroku' => [
+        'path' => 'heroku',
+        'setWritable' => [
+            'backend/runtime',
+            'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],

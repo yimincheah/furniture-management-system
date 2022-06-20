@@ -11,8 +11,6 @@ $(document).ready(function () {
             'flip',
             'slice',
             'box3D',
-           
-            
             'glide',
             'card'
         ],
@@ -23,7 +21,7 @@ $(document).ready(function () {
                     cover: "../../image/silder/slider-1.jpg"
                 },
                 title: 'Change Home Look',
-                desc: "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. or randomised words which don't look even slightly believable.",
+                desc: "Make your home as comfortable and attractive as possible and then get on with living. There's more to life than decorating.",
                 descLength: 220,
                 button: {
                     text: 'Shop Now',
@@ -37,7 +35,7 @@ $(document).ready(function () {
                     cover: "../../image/silder/slider-2.jpg"
                 },
                 title: 'Best Group Chair',
-                desc: "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. or randomised words which don't look even slightly believable.",
+                desc: "Worrying is like a rocking chair, it gives you something to do, but it gets you nowhere. We're all just passing time and occupy our chair very briefly. If it's the right chair, it doesn't take too long to get comfortable in it. If they don't give you a seat at the table, bring a folding chair.",
                 button: {
                     text: 'Shop Now',
                     url: false,
@@ -50,7 +48,7 @@ $(document).ready(function () {
                     cover: "../../image/silder/slider-3.jpg"
                 },
                 title: 'Best Look Chair',
-                desc: "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. or randomised words which don't look even slightly believable.",
+                desc: "Decorate your home. It gives the illusion that your life is more interesting than it really is.",
                 descLength: 190,
                 button: {
                     text: 'Shop Now',
@@ -63,8 +61,8 @@ $(document).ready(function () {
                     main: "../../image/silder/slider-2.jpg",
                     cover: "../../image/silder/slider-6.jpg"
                 },
-                title: 'New Soft Soffa ',
-                desc: "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. or randomised words which don't look even slightly believable.",
+                title: 'New Soft Sofa ',
+                desc: "I've always loved great upholstery, and think that a great sofa is one of the most important pieces of furniture in your home.",
                 button: {
                     text: 'Shop Now',
                     url: false,

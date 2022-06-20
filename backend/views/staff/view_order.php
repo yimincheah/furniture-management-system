@@ -16,7 +16,7 @@ $this->title = 'Order Information';
                 <h2>Order</h2>
                 <ul>
                     <li><?= Html::a('Home', ['/']) ?></li>
-                    <li><?= Html::a('Order', ['/orders/index']) ?></li>
+                    <li><?= Html::a('Schedule', ['/staff/schedule']) ?></li>
                 </ul>
             </div>
         </div>

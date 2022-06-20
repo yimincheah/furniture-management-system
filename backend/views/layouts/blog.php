@@ -8,7 +8,7 @@
 		<div class="container-fluid">
 			<div class="heading_wrapper wow fadeInDown animated">
 				<h2 class="wow fadeInDown animated">What My Client Says</h2>
-				<p class="wow fadeInDown animated">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text </p>
+				<p class="wow fadeInDown animated">We are very fortunate to have formed excellent partnerships with many of our clients. And we’ve formed more than just working relationships with them; we have formed true friendships. Here's what they're saying about us.</p>
 			</div>
 				<div class="row">
 					<div id="testimonial" class="owl-carousel owl-theme">

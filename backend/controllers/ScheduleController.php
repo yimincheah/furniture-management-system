@@ -9,6 +9,7 @@ use backend\models\User;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use Yii;
 
 class ScheduleController extends Controller
@@ -20,9 +21,19 @@ class ScheduleController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['view', 'update', '_form', 'index', 'view-order', 'send-notification'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ],
             ],
         ];
@@ -110,7 +121,7 @@ class ScheduleController extends Controller
                 ->setTextBody($content2)
                 ->send();
         
-                Yii::$app->session->setFlash('success','Email Send Successfully');
+                Yii::$app->session->setFlash('success','Update and Send Email Successfully');
             }
 
             return $this->redirect(['index']);

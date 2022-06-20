@@ -183,7 +183,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 $script = <<< JS
 $('#customer_id').change(function(){
     var id = $(this).val();
-    $.get('get-address',{id : id }, function(data){
+    $.get('index.php?r=cart/get-address',{id : id }, function(data){
         var data = $.parseJSON(data);
 
 		if(data.addressLine2 == null)
@@ -198,12 +198,12 @@ $('#customer_id').change(function(){
         $('#orders-post_code').attr('value',data.postCode);  
         $('#orders-country').attr('value',data.country);  
 
-		$.get('get-state',{id : data.state}, function(data2){
+		$.get('index.php?r=cart/get-state',{id : data.state}, function(data2){
 			var data2 = $.parseJSON(data2);
 			$('#orders-state').attr('value',data2.state_name);   
 		}); 
 
-		$.get('get-city',{id : data.city}, function(data3){
+		$.get('index.php?r=cart/get-city',{id : data.city}, function(data3){
 			var data3 = $.parseJSON(data3);
 			$('#orders-city').attr('value',data3.city_name);   
 		}); 

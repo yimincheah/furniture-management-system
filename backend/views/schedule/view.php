@@ -2,19 +2,17 @@
 
 use yii\web\JsExpression;
 use yii\helpers\Html;
-
-$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['depends' => [yii\web\JqueryAsset::class]]);
 
 $this->title = 'Schedule';
 
 ?>
 
+<?php
 
-
-<?php 
 $JSEventClick = <<<EOF
 function(calEvent, jsEvent, view) {
-window.open('?r=schedule/view-order&id='+calEvent.id);
+window.open("index.php?r=schedule/view-order&id="+calEvent.id);
 return false;
 }
 EOF;
@@ -39,17 +37,18 @@ EOF;
 
      <div class="container-fluid">
 
-     <?= \yii2fullcalendar\yii2fullcalendar::widget([
-          'events'=>$tasks,
-          'clientOptions'=>[
-               'height'=>'auto',
-               'timeFormat' => 'H:mm',
-               'header'=>[
-                    'right'=>'',   
-               ],
-               'eventClick' => new JsExpression($JSEventClick), 
-          ]
-     ]);
-     ?>
+          <?= \yii2fullcalendar\yii2fullcalendar::widget([
+               'events' => $tasks,
+               'clientOptions' => [
+                    'height' => 'auto',
+                    'timeFormat' => 'H:mm',
+                    'header' => [
+                         'right' => '',
+                    ],
+                    'eventClick' => new JsExpression($JSEventClick),
+               ]
+          ]);
+          ?>
      </div>
 </div>
+

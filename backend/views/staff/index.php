@@ -50,7 +50,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                 'value'=>'user.username',
             ],
             [
-                'class' => yii\grid\ActionColumn::className(),
+                'class' => yii\grid\ActionColumn::class,
                 'header'=>'Actions',
                 'template' => '{view} {delete}',
                 'headerOptions' => ['style' => 'color:black'],

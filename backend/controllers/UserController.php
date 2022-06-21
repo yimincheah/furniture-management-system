@@ -36,7 +36,7 @@ class UserController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['view','update','_form'],
+                            'actions' => ['view','update','_form', 'upload-ajax', 'deletefile-ajax'],
                             'allow' => true,
                             'roles' => ['admin','staff'],
                         ],

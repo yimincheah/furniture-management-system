@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\BaseFileHelper;
 use yii\helpers\Url;
-use yii\helpers\html;
+use yii\helpers\Html;
 use yii\filters\AccessControl;
 use Yii;
 /**

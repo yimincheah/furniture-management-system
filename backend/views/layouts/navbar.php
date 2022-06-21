@@ -13,7 +13,7 @@ use yii\bootstrap4\Html;
 					<div class="logo">
 						<img src="<?= Yii::$app->request->baseUrl ?>/image/logo/logo.png" alt="logo">
 					</div>
-					<?php if (!Yii::$app->user->isGuest) { ?>
+					<?php if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) { ?>
 						<div class="others-option align-items-center">
 							<div class="option-item">
 								<div class="cart-btn">
@@ -89,7 +89,7 @@ use yii\bootstrap4\Html;
 
 										<li class="panel mobile_menu_li"><?= Html::a('View Schedule', ['/staff/schedule'], ['class' => 'mar-mobile']) ?></li>
 
-										<li class="panel mobile_menu_li"><?= Html::a('Manage Schedule', ['/staff/schedule'], ['class' => 'mar-mobile']) ?></li>
+										<li class="panel mobile_menu_li"><?= Html::a('Manage Schedule', ['/staff/view-schedule'], ['class' => 'mar-mobile']) ?></li>
 
 										<li class="panel mobile_menu_li"><?= Html::a('Profile', ['/user/view', 'id' => Yii::$app->user->id], ['class' => 'mar-mobile']) ?></li>
 
@@ -179,13 +179,7 @@ use yii\bootstrap4\Html;
 
 							</ul>
 
-							<div class="others-option align-items-center">
-								<div class="option-item">
-									<div class="cart-btn">
-										<?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/cart/index']) ?>
-									</div>
-								</div>
-							</div>
+							
 						<?php } ?>
 						</div>
 					</nav>

@@ -177,6 +177,8 @@ class StaffController extends Controller
             return $this->redirect(['view-schedule']);
         }
 
+        Yii::$app->session->setFlash('success','Update Successfully');
+
         return $this->render('update', [
             'model' => $model,
         ]);

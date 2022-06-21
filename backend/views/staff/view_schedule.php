@@ -17,7 +17,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
                     <h2>Schedule</h2>
                     <ul>
                         <li><?= Html::a('Home', ['/']) ?></li>
-                        <li><?= Html::a('Schedule', ['/schedule/index']) ?></li>
+                        <li><?= Html::a('Schedule', ['/staff/view-schedule']) ?></li>
                     </ul>
             </div>
         </div>
@@ -28,6 +28,8 @@ $this->registerJsFile(Yii::getAlias('@web') . '/vendor/jquery/jquery.min.js', ['
 
     <div class="container-fluid">
 
+    <?= common\widgets\Alert::widget() ?>
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= GridView::widget([

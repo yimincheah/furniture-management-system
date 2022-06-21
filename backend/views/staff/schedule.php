@@ -28,7 +28,7 @@ EOF;
                     <h2>Schedule</h2>
                     <ul>
                         <li><?= Html::a('Home', ['/']) ?></li>
-                        <li><?= Html::a('Schedule', ['/schedule/view']) ?></li>
+                        <li><?= Html::a('Schedule', ['/staff/schedule']) ?></li>
                     </ul>
             </div>
         </div>

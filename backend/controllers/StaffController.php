@@ -174,10 +174,11 @@ class StaffController extends Controller
         $model = $this->findOrder($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            Yii::$app->session->setFlash('success','Update Successfully');
+            
             return $this->redirect(['view-schedule']);
         }
-
-        Yii::$app->session->setFlash('success','Update Successfully');
 
         return $this->render('update', [
             'model' => $model,

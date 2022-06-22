@@ -48,7 +48,13 @@ $this->title = 'Order Details';
                 [
                     'label' => 'Assigned To',
                     'attribute' =>'staff_id',
-                    'value' => $model->staff->username
+                    'value' => function ($model) {
+                        if($model->staff_id == null){
+                            return '-';
+                        }else{
+                            return $model->staff->username;
+                        }
+                    },
                 ],
                 [
                     'attribute' => 'order_status',

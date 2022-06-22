@@ -179,8 +179,18 @@ use yii\bootstrap4\Html;
 
 							</ul>
 
-							
+							<?php if (Yii::$app->user->can('admin')) { ?>
+								<div class="others-option align-items-center">
+									<div class="option-item">
+										<div class="cart-btn">
+											<?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/cart/index']) ?>
+										</div>
+									</div>
+								</div>
+
+							<?php } ?>
 						<?php } ?>
+
 						</div>
 					</nav>
 					<div class="clear"></div>

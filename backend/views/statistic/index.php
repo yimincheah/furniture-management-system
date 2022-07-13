@@ -2,9 +2,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use dosamigos\chartjs\ChartJs;
-use yii\helpers\ArrayHelper;
+
 
 $this->title = 'Statistic';
 ?>

@@ -117,5 +117,5 @@ $this->registerJs(
     $(".error-summary").hide();
 
 SCRIPT,
-    \yii\web\View::POS_LOAD
+    \yii\web\View::POS_END
 );
